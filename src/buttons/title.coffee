@@ -13,10 +13,6 @@ class TitleButton extends Button
       text: @_t('normalText'),
       param: 'p'
     }, '|', {
-      name: 'h1',
-      text: @_t('title') + ' 1',
-      param: 'h1'
-    }, {
       name: 'h2',
       text: @_t('title') + ' 2',
       param: 'h2'

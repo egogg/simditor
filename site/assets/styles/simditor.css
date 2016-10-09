@@ -140,11 +140,11 @@
 
 .simditor {
   position: relative;
-  border: 1px solid #c9d8db;
+  border: 1px solid #e0e0e0;
 }
 .simditor .simditor-wrapper {
   position: relative;
-  background: #ffffff;
+  background: #fff;
 }
 .simditor .simditor-wrapper > textarea {
   display: none !important;
@@ -169,7 +169,7 @@
   font-size: 16px;
   font-family: arial, sans-serif;
   line-height: 1.5;
-  color: #999999;
+  color: #999;
   background: transparent;
 }
 .simditor .simditor-wrapper.toolbar-floating .simditor-toolbar {
@@ -193,6 +193,18 @@
   position: absolute;
   bottom: 0;
   left: 0;
+}
+.simditor .simditor-wrapper.toolbar-bottom .simditor-toolbar {
+  border-bottom: none;
+  border-top: 1px solid #e0e0e0;
+}
+.simditor .simditor-wrapper.toolbar-bottom .simditor-toolbar .toolbar-menu {
+  top: inherit;
+  bottom: 40px;
+}
+.simditor .simditor-wrapper.toolbar-bottom .simditor-toolbar .toolbar-menu:before {
+  top: inherit;
+  bottom: -3px;
 }
 .simditor .simditor-body {
   padding: 22px 15px 40px;
@@ -234,7 +246,7 @@
   cursor: pointer;
 }
 .simditor .simditor-body img.selected {
-  box-shadow: 0 0 0 4px #cccccc;
+  box-shadow: 0 0 0 4px #ccc;
 }
 .simditor .simditor-paste-bin {
   position: fixed;
@@ -251,8 +263,8 @@
   -webkit-user-select: text;
 }
 .simditor .simditor-toolbar {
-  border-bottom: 1px solid #eeeeee;
-  background: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+  background: #fff;
   width: 100%;
 }
 .simditor .simditor-toolbar > ul {
@@ -278,7 +290,7 @@
   width: 46px;
   height: 40px;
   outline: none;
-  color: #333333;
+  color: #333;
   font-size: 15px;
   line-height: 40px;
   vertical-align: middle;
@@ -296,7 +308,7 @@
   opacity: 1;
 }
 .simditor .simditor-toolbar > ul > li > .toolbar-item.active {
-  background: #eeeeee;
+  background: #eee;
 }
 .simditor .simditor-toolbar > ul > li > .toolbar-item.active span {
   opacity: 1;
@@ -355,7 +367,7 @@
   top: 40px;
   left: 0;
   z-index: 21;
-  background: #ffffff;
+  background: #fff;
   text-align: left;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
 }
@@ -364,7 +376,7 @@
   display: block;
   width: 46px;
   height: 4px;
-  background: #ffffff;
+  background: #fff;
   position: absolute;
   top: -3px;
   left: 0;
@@ -381,34 +393,34 @@
   line-height: 2em;
   padding: 0 10px;
   text-decoration: none;
-  color: #666666;
+  color: #666;
 }
 .simditor .simditor-toolbar .toolbar-menu ul > li .menu-item:hover {
   background: #f6f6f6;
 }
 .simditor .simditor-toolbar .toolbar-menu ul > li .menu-item.menu-item-h1 {
   font-size: 24px;
-  color: #333333;
+  color: #333;
 }
 .simditor .simditor-toolbar .toolbar-menu ul > li .menu-item.menu-item-h2 {
   font-size: 22px;
-  color: #333333;
+  color: #333;
 }
 .simditor .simditor-toolbar .toolbar-menu ul > li .menu-item.menu-item-h3 {
   font-size: 20px;
-  color: #333333;
+  color: #333;
 }
 .simditor .simditor-toolbar .toolbar-menu ul > li .menu-item.menu-item-h4 {
   font-size: 18px;
-  color: #333333;
+  color: #333;
 }
 .simditor .simditor-toolbar .toolbar-menu ul > li .menu-item.menu-item-h5 {
   font-size: 16px;
-  color: #333333;
+  color: #333;
 }
 .simditor .simditor-toolbar .toolbar-menu ul > li .separator {
   display: block;
-  border-top: 1px solid #cccccc;
+  border-top: 1px solid #ccc;
   height: 0;
   line-height: 0;
   font-size: 0;
@@ -438,7 +450,7 @@
   opacity: 0.8;
 }
 .simditor .simditor-toolbar .toolbar-menu.toolbar-menu-color .color-list li .font-color.font-color-default {
-  background: #333333;
+  background: #333;
 }
 .simditor .simditor-toolbar .toolbar-menu.toolbar-menu-color .color-list li .font-color-1 {
   background: #E33737;
@@ -462,7 +474,7 @@
   background: #999999;
 }
 .simditor .simditor-toolbar .toolbar-menu.toolbar-menu-table .menu-create-table {
-  background: #ffffff;
+  background: #fff;
   padding: 1px;
 }
 .simditor .simditor-toolbar .toolbar-menu.toolbar-menu-table .menu-create-table table {
@@ -478,7 +490,7 @@
 .simditor .simditor-toolbar .toolbar-menu.toolbar-menu-table .menu-create-table table td:before {
   width: 16px;
   height: 16px;
-  border: 1px solid #ffffff;
+  border: 1px solid #fff;
   background: #f3f3f3;
   display: block;
   content: "";
@@ -516,7 +528,7 @@
 .simditor .simditor-popover {
   display: none;
   padding: 5px 8px 0;
-  background: #ffffff;
+  background: #fff;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
   border-radius: 2px;
   position: absolute;
@@ -537,6 +549,7 @@
   width: 200px;
   box-sizing: border-box;
   font-size: 12px;
+  line-height: 12px;
 }
 .simditor .simditor-popover .settings-field input[type=text].image-size {
   width: 83px;
@@ -550,7 +563,7 @@
 .simditor .simditor-popover.link-popover .btn-unlink, .simditor .simditor-popover.image-popover .btn-upload, .simditor .simditor-popover.image-popover .btn-restore {
   display: inline-block;
   margin: 0 0 0 5px;
-  color: #333333;
+  color: #333;
   font-size: 14px;
   outline: 0;
 }
@@ -593,18 +606,18 @@
   margin-top: 0 !important;
 }
 .simditor .simditor-body a, .editor-style a {
-  color: #4298BA;
+  color: #03A9F4;
   text-decoration: none;
   word-break: break-all;
 }
 .simditor .simditor-body a:visited, .editor-style a:visited {
-  color: #4298BA;
+  color: #03A9F4;
 }
 .simditor .simditor-body a:hover, .editor-style a:hover {
-  color: #0F769F;
+  color: #2196F3;
 }
 .simditor .simditor-body a:active, .editor-style a:active {
-  color: #9E792E;
+  color: #3F51B5;
 }
 .simditor .simditor-body a:hover, .simditor .simditor-body a:active, .editor-style a:hover, .editor-style a:active {
   outline: 0;
@@ -612,7 +625,7 @@
 .simditor .simditor-body h1, .simditor .simditor-body h2, .simditor .simditor-body h3, .simditor .simditor-body h4, .simditor .simditor-body h5, .simditor .simditor-body h6, .editor-style h1, .editor-style h2, .editor-style h3, .editor-style h4, .editor-style h5, .editor-style h6 {
   font-weight: normal;
   margin: 40px 0 20px;
-  color: #000000;
+  color: #000;
 }
 .simditor .simditor-body h1, .editor-style h1 {
   font-size: 24px;
@@ -680,7 +693,7 @@
   display: inline-block;
   padding: 0 4px;
   margin: 0 5px;
-  background: #eeeeee;
+  background: #eee;
   border-radius: 3px;
   font-size: 13px;
   font-family: 'monaco', 'Consolas', "Liberation Mono", Courier, monospace;

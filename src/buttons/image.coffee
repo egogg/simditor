@@ -145,7 +145,7 @@ class ImageButton extends Button
         return unless $img.hasClass('uploading')
         src = if img then img.src else @defaultImage
 
-        @loadImage $img, src, =>
+        @loadImage $img, src, null, =>
           if @popover.active
             @popover.refresh()
             @popover.srcEl.val(@_t('uploading'))
@@ -189,8 +189,9 @@ class ImageButton extends Button
         img_path = @defaultImage
       else
         img_path = result.file_path
+        attach_id = result.attach_id
 
-      @loadImage $img, img_path, =>
+      @loadImage $img, img_path, attach_id, =>
         $img.removeData 'file'
         $img.removeClass 'uploading'
         .removeClass 'loading'
@@ -223,7 +224,7 @@ class ImageButton extends Button
       $img = file.img
       return unless $img.hasClass('uploading') and $img.parent().length > 0
 
-      @loadImage $img, @defaultImage, =>
+      @loadImage $img, @defaultImage, null, =>
         $img.removeData 'file'
         $img.removeClass 'uploading'
         .removeClass 'loading'
@@ -244,7 +245,7 @@ class ImageButton extends Button
   _status: ->
     @_disableStatus()
 
-  loadImage: ($img, src, callback) ->
+  loadImage: ($img, src, attach_id, callback) ->
     positionMask = =>
       imgOffset = $img.offset()
       wrapperOffset = @editor.wrapper.offset()
@@ -276,6 +277,7 @@ class ImageButton extends Button
 
       width = img.width
       height = img.height
+      attach_id = img.attach_id
 
       $img.attr
         src: src,
@@ -283,6 +285,8 @@ class ImageButton extends Button
         height: height,
         'data-image-size': width + ',' + height
       .removeClass('loading')
+
+      $img.attr 'data-attach-id', attach_id if attach_id
 
       if $img.hasClass('uploading') # img being uploaded
         @editor.util.reflow @editor.body
@@ -300,6 +304,7 @@ class ImageButton extends Button
         .removeClass('loading')
 
     img.src = src
+    img.attach_id = attach_id
 
   createImage: (name = 'Image') ->
     @editor.focus() unless @editor.inputManager.focused
@@ -331,7 +336,7 @@ class ImageButton extends Button
   command: (src) ->
     $img = @createImage()
 
-    @loadImage $img, src || @defaultImage, =>
+    @loadImage $img, src || @defaultImage, null, =>
       @editor.trigger 'valuechanged'
       @editor.util.reflow $img
       $img.click()
@@ -361,16 +366,6 @@ class ImagePopover extends Popover
       <div class='settings-field'>
         <label>#{ @_t 'imageAlt' }</label>
         <input class="image-alt" id="image-alt" type="text" tabindex="1" />
-      </div>
-      <div class="settings-field">
-        <label>#{ @_t 'imageSize' }</label>
-        <input class="image-size" id="image-width" type="text" tabindex="2" />
-        <span class="times">×</span>
-        <input class="image-size" id="image-height" type="text" tabindex="3" />
-        <a class="btn-restore" href="javascript:;"
-          title="#{ @_t 'restoreImageSize' }" tabindex="-1">
-          <span class="simditor-icon simditor-icon-undo"></span>
-        </a>
       </div>
     </div>
     """

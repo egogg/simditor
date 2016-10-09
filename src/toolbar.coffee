@@ -8,6 +8,7 @@ class Toolbar extends SimpleModule
     toolbarFloat: true
     toolbarHidden: false
     toolbarFloatOffset: 0
+    toolbarPosition: 'top'
 
   _tpl:
     wrapper: '<div class="simditor-toolbar"><ul></ul></div>'
@@ -33,7 +34,7 @@ class Toolbar extends SimpleModule
     $(document).on 'mousedown.simditor' + @editor.id, (e) =>
       @list.find('.menu-on').removeClass('.menu-on')
 
-    if not @opts.toolbarHidden and @opts.toolbarFloat
+    if not @opts.toolbarHidden and @opts.toolbarPosition == 'top' and @opts.toolbarFloat
       @wrapper.css 'top', @opts.toolbarFloatOffset
       toolbarHeight = 0
 
@@ -81,7 +82,11 @@ class Toolbar extends SimpleModule
 
   _render: ->
     @buttons = []
-    @wrapper = $(@_tpl.wrapper).prependTo(@editor.wrapper)
+    if @opts.toolbarPosition == 'bottom'
+      @wrapper = $(@_tpl.wrapper).appendTo(@editor.wrapper)
+      @editor.wrapper.addClass('toolbar-bottom')
+    else
+      @wrapper = $(@_tpl.wrapper).prependTo(@editor.wrapper)
     @list = @wrapper.find('ul')
 
     for name in @opts.toolbar

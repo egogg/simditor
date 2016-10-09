@@ -1,4 +1,6 @@
 encoding: utf-8
 name: Simditor
-markdown: redcarpet
+kramdown: 
+  input: GFM
+  syntax_highlighter: rouge
 source: site

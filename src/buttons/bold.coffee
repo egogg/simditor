@@ -5,7 +5,7 @@ class BoldButton extends Button
 
   icon: 'bold'
 
-  htmlTag: 'b, strong'
+  htmlTag: 'b'
 
   disableTag: 'pre'
 

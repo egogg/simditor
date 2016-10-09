@@ -19,6 +19,7 @@ class Simditor extends SimpleModule
     params: {}
     upload: false
     indentWidth: 40
+    onsync: null
 
   _init: ->
     @textarea = $(@opts.textarea)
@@ -159,6 +160,8 @@ class Simditor extends SimpleModule
     cloneBody.find('img.uploading').remove()
 
     val = $.trim(cloneBody.html())
+    if typeof @opts.onsync is 'function'
+      val = @opts.onsync(val)
     @textarea.val val
     val
 

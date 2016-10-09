@@ -1,6 +1,6 @@
 
 $ ->
-  Simditor.locale = 'en-US'
+  Simditor.locale = 'zh-CN'
 
   toolbar= ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent', 'alignment']
   mobileToolbar=["bold","underline","strikethrough","color","ul","ol"]
@@ -12,6 +12,8 @@ $ ->
     pasteImage: true
     defaultImage: 'assets/images/image.png'
     upload: if location.search == '?upload' then {url: '/upload'} else false
+    onsync: (t)->
+      console.log(t)
 
   $preview = $('#preview')
   if $preview.length > 0

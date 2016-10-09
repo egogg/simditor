@@ -1,7 +1,7 @@
 (function() {
   $(function() {
     var $preview, editor, mobileToolbar, toolbar;
-    Simditor.locale = 'en-US';
+    Simditor.locale = 'zh-CN';
     toolbar = ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent', 'alignment'];
     mobileToolbar = ["bold", "underline", "strikethrough", "color", "ul", "ol"];
     if (mobilecheck()) {
@@ -15,7 +15,10 @@
       defaultImage: 'assets/images/image.png',
       upload: location.search === '?upload' ? {
         url: '/upload'
-      } : false
+      } : false,
+      onsync: function(t) {
+        return console.log(t);
+      }
     });
     $preview = $('#preview');
     if ($preview.length > 0) {
