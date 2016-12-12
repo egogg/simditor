@@ -2827,10 +2827,7 @@ Button = (function(superClass) {
           if (_this.wrapper.is('.menu-on')) {
             exceed = _this.menuWrapper.offset().left + _this.menuWrapper.outerWidth() + 5 - _this.editor.wrapper.offset().left - _this.editor.wrapper.outerWidth();
             if (exceed > 0) {
-              _this.menuWrapper.css({
-                'left': 'auto',
-                'right': 0
-              });
+              _this.menuWrapper.addClass('menu-right');
             }
             _this.trigger('menuexpand');
           }

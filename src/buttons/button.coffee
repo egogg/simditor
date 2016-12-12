@@ -54,9 +54,7 @@ class Button extends SimpleModule
             @editor.wrapper.offset().left - @editor.wrapper.outerWidth()
 
           if exceed > 0
-            @menuWrapper.css
-              'left': 'auto'
-              'right': 0
+            @menuWrapper.addClass 'menu-right'
 
           @trigger 'menuexpand'
 

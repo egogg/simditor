@@ -371,6 +371,14 @@
   text-align: left;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
 }
+.simditor .simditor-toolbar .toolbar-menu.menu-right {
+  right: 0;
+  left: auto;
+}
+.simditor .simditor-toolbar .toolbar-menu.menu-right:before {
+  right: 0;
+  left: auto;
+}
 .simditor .simditor-toolbar .toolbar-menu:before {
   content: '';
   display: block;
