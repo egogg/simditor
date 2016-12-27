@@ -2829,6 +2829,7 @@ Button = (function(superClass) {
             if (exceed > 0) {
               _this.menuWrapper.addClass('menu-right');
             }
+            _this.loadMenu();
             _this.trigger('menuexpand');
           }
           return false;
@@ -2945,6 +2946,8 @@ Button = (function(superClass) {
     }
     return results;
   };
+
+  Button.prototype.loadMenu = function() {};
 
   Button.prototype.setActive = function(active) {
     if (active === this.active) {

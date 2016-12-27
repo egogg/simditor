@@ -56,6 +56,8 @@ class Button extends SimpleModule
           if exceed > 0
             @menuWrapper.addClass 'menu-right'
 
+          @loadMenu();
+
           @trigger 'menuexpand'
 
         return false
@@ -145,6 +147,9 @@ class Button extends SimpleModule
         $menuBtnEl.find('span').addClass @iconClassOf menuItem.icon
       else
         $menuBtnEl.find('span').text(menuItem.text)
+
+  loadMenu: ->
+    # placeholder
 
   setActive: (active) ->
     return if active == @active
