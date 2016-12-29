@@ -300,8 +300,10 @@ class ImageButton extends Button
     img.onerror = ->
       callback(false) if $.isFunction(callback)
       $mask.remove()
-      $img.removeData('mask')
-        .removeClass('loading')
+      $img.detach()
+      alert @_t('imageError')
+      # $img.removeData('mask')
+      #   .removeClass('loading')
 
     img.src = src
     img.attach_id = attach_id
