@@ -190,8 +190,10 @@ $simditor-button-width: 46px;
             opacity: 0.6;
 
             &.simditor-icon {
-              display: inline;
-              line-height: normal;
+              display: block;
+              line-height: $simditor-button-height;
+              width: $simditor-button-width;
+              height: $simditor-button-height;
             }
           }
 
