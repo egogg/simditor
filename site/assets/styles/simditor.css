@@ -301,8 +301,10 @@
   opacity: 0.6;
 }
 .simditor .simditor-toolbar > ul > li > .toolbar-item span.simditor-icon {
-  display: inline;
-  line-height: normal;
+  display: block;
+  line-height: 40px;
+  width: 46px;
+  height: 40px;
 }
 .simditor .simditor-toolbar > ul > li > .toolbar-item:hover span {
   opacity: 1;

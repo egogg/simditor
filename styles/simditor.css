@@ -1,7 +1,7 @@
 /*!
 * Simditor v2.3.6
 * http://simditor.tower.im/
-* 2016-12-27
+* 2017-03-19
 */
 @font-face {
   font-family: 'Simditor';
@@ -306,8 +306,10 @@
   opacity: 0.6;
 }
 .simditor .simditor-toolbar > ul > li > .toolbar-item span.simditor-icon {
-  display: inline;
-  line-height: normal;
+  display: block;
+  line-height: 40px;
+  width: 46px;
+  height: 40px;
 }
 .simditor .simditor-toolbar > ul > li > .toolbar-item:hover span {
   opacity: 1;

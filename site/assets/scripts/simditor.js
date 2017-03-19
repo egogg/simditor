@@ -2680,6 +2680,7 @@ Simditor.i18n = {
     'imageUrl': '图片地址',
     'imageSize': '图片尺寸',
     'imageAlt': '图片描述',
+    'imageError': '图片上传失败',
     'restoreImageSize': '还原图片尺寸',
     'uploading': '正在上传',
     'indent': '向右缩进',
