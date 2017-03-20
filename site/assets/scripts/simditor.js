@@ -4444,6 +4444,7 @@ ImageButton = (function(superClass) {
           img_path = result.file_path;
           attach_id = result.attach_id;
         }
+        alert('uploadsuccess!');
         _this.loadImage($img, img_path, attach_id, function() {
           var $mask;
           $img.removeData('file');
@@ -4487,6 +4488,7 @@ ImageButton = (function(superClass) {
         if (!($img.hasClass('uploading') && $img.parent().length > 0)) {
           return;
         }
+        alert('uploaderror!');
         _this.loadImage($img, _this.defaultImage, null, function() {
           var $mask;
           $img.removeData('file');
