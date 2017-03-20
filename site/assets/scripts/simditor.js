@@ -4207,7 +4207,7 @@ ImageButton = (function(superClass) {
 
   ImageButton.prototype.defaultImage = '';
 
-  ImageButton.prototype.imageLoadError = '';
+  ImageButton.prototype.onImageLoadError = '';
 
   ImageButton.prototype.errorImage = '';
 
@@ -4493,9 +4493,9 @@ ImageButton = (function(superClass) {
         }
         $img.attr({
           src: _this.errorImage
-        });
-        if ($.isFunction(_this.imageLoadError)) {
-          _this.imageLoadError();
+        }.addClass('simditor-image-error'));
+        if ($.isFunction(_this.onImageLoadError)) {
+          _this.onImageLoadError();
         }
         _this.loadImage($img, _this.errorImage, null, function() {
           var $mask;
@@ -4582,9 +4582,7 @@ ImageButton = (function(superClass) {
         callback(false);
       }
       $mask.remove();
-      return $img.attr({
-        src: this.errorImage
-      }.removeData('mask').removeClass('loading'));
+      return $img.removeData('mask').removeClass('loading');
     };
     img.src = src;
     return img.attach_id = attach_id;

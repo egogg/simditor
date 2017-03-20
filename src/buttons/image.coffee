@@ -11,7 +11,7 @@ class ImageButton extends Button
 
   defaultImage: ''
 
-  imageLoadError : ''
+  onImageLoadError : ''
 
   errorImage: ''
 
@@ -229,8 +229,9 @@ class ImageButton extends Button
       return unless $img.hasClass('uploading') and $img.parent().length > 0
 
       $img.attr
-        src: @errorImage,
-      @imageLoadError() if $.isFunction(@imageLoadError)
+        src: @errorImage
+        .addClass 'simditor-image-error'
+      @onImageLoadError() if $.isFunction(@onImageLoadError)
 
       @loadImage $img, @errorImage, null, =>
         $img.removeData 'file'
@@ -300,17 +301,15 @@ class ImageButton extends Button
         positionMask()
       else
         $mask.remove()
-        $img.removeData('mask')
+        $img.removeData 'mask'
 
       callback(img) if $.isFunction(callback)
 
     img.onerror = ->
       callback(false) if $.isFunction(callback)
       $mask.remove()
-      $img.attr
-        src: @errorImage
-        .removeData('mask')
-        .removeClass('loading')
+      $img.removeData 'mask'
+        .removeClass 'loading'
 
     img.src = src
     img.attach_id = attach_id
