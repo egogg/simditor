@@ -11,6 +11,10 @@ class ImageButton extends Button
 
   defaultImage: ''
 
+  imageLoadError : ''
+
+  errorImage: ''
+
   needFocus: false
 
   _init: () ->
@@ -191,7 +195,6 @@ class ImageButton extends Button
         img_path = result.file_path
         attach_id = result.attach_id
 
-      alert 'uploadsuccess!'
       @loadImage $img, img_path, attach_id, =>
         $img.removeData 'file'
         $img.removeClass 'uploading'
@@ -225,8 +228,11 @@ class ImageButton extends Button
       $img = file.img
       return unless $img.hasClass('uploading') and $img.parent().length > 0
 
-      alert 'uploaderror!'
-      @loadImage $img, @defaultImage, null, =>
+      $img.attr
+        src: @errorImage,
+      @imageLoadError() if $.isFunction(@imageLoadError)
+
+      @loadImage $img, @errorImage, null, =>
         $img.removeData 'file'
         $img.removeClass 'uploading'
         .removeClass 'loading'
@@ -242,7 +248,6 @@ class ImageButton extends Button
       @editor.trigger 'valuechanged'
       if @editor.body.find('img.uploading').length < 1
         @editor.uploader.trigger 'uploadready', [file, result]
-
 
   _status: ->
     @_disableStatus()
@@ -302,7 +307,9 @@ class ImageButton extends Button
     img.onerror = ->
       callback(false) if $.isFunction(callback)
       $mask.remove()
-      $img.removeData('mask')
+      $img.attr
+        src: @errorImage
+        .removeData('mask')
         .removeClass('loading')
 
     img.src = src

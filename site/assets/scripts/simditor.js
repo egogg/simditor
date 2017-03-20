@@ -4207,6 +4207,10 @@ ImageButton = (function(superClass) {
 
   ImageButton.prototype.defaultImage = '';
 
+  ImageButton.prototype.imageLoadError = '';
+
+  ImageButton.prototype.errorImage = '';
+
   ImageButton.prototype.needFocus = false;
 
   ImageButton.prototype._init = function() {
@@ -4444,7 +4448,6 @@ ImageButton = (function(superClass) {
           img_path = result.file_path;
           attach_id = result.attach_id;
         }
-        alert('uploadsuccess!');
         _this.loadImage($img, img_path, attach_id, function() {
           var $mask;
           $img.removeData('file');
@@ -4488,8 +4491,13 @@ ImageButton = (function(superClass) {
         if (!($img.hasClass('uploading') && $img.parent().length > 0)) {
           return;
         }
-        alert('uploaderror!');
-        _this.loadImage($img, _this.defaultImage, null, function() {
+        $img.attr({
+          src: _this.errorImage
+        });
+        if ($.isFunction(_this.imageLoadError)) {
+          _this.imageLoadError();
+        }
+        _this.loadImage($img, _this.errorImage, null, function() {
           var $mask;
           $img.removeData('file');
           $img.removeClass('uploading').removeClass('loading');
@@ -4574,7 +4582,9 @@ ImageButton = (function(superClass) {
         callback(false);
       }
       $mask.remove();
-      return $img.removeData('mask').removeClass('loading');
+      return $img.attr({
+        src: this.errorImage
+      }.removeData('mask').removeClass('loading'));
     };
     img.src = src;
     return img.attach_id = attach_id;
