@@ -234,6 +234,7 @@ class ImageButton extends Button
 
       $img.attr
         src : @errorImage
+      .addClass 'simditor-image-error'
 
       @loadImage $img, @errorImage, null, =>
         $img.removeData 'file'
@@ -287,7 +288,6 @@ class ImageButton extends Button
 
       width = img.width
       height = img.height
-      attach_id = img.attach_id
 
       $img.attr
         src: src,
@@ -314,7 +314,6 @@ class ImageButton extends Button
         .removeClass 'loading'
 
     img.src = src
-    img.attach_id = attach_id
 
   createImage: (name = 'Image') ->
     @editor.focus() unless @editor.inputManager.focused

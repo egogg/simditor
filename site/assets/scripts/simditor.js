@@ -4498,7 +4498,7 @@ ImageButton = (function(superClass) {
         }
         $img.attr({
           src: _this.errorImage
-        });
+        }).addClass('simditor-image-error');
         _this.loadImage($img, _this.errorImage, null, function() {
           var $mask;
           $img.removeData('file');
@@ -4557,7 +4557,6 @@ ImageButton = (function(superClass) {
         }
         width = img.width;
         height = img.height;
-        attach_id = img.attach_id;
         $img.attr({
           src: src,
           width: width,
@@ -4586,8 +4585,7 @@ ImageButton = (function(superClass) {
       $mask.remove();
       return $img.removeData('mask').removeClass('loading');
     };
-    img.src = src;
-    return img.attach_id = attach_id;
+    return img.src = src;
   };
 
   ImageButton.prototype.createImage = function(name) {
