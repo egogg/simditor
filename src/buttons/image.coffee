@@ -40,6 +40,8 @@ class ImageButton extends Button
         @menu = false
 
     @defaultImage = @editor.opts.defaultImage
+    @errorImage = @editor.opts.errorImage
+    @onImageLoadError = @editor.opts.onImageLoadError
 
     @editor.body.on 'click', 'img:not([data-non-image])', (e) =>
       $img = $(e.currentTarget)
