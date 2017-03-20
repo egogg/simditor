@@ -4491,9 +4491,6 @@ ImageButton = (function(superClass) {
         if (!($img.hasClass('uploading') && $img.parent().length > 0)) {
           return;
         }
-        $img.attr({
-          src: _this.errorImage
-        }.addClass('simditor-image-error'));
         if ($.isFunction(_this.onImageLoadError)) {
           _this.onImageLoadError();
         }

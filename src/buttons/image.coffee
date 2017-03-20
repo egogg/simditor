@@ -228,9 +228,6 @@ class ImageButton extends Button
       $img = file.img
       return unless $img.hasClass('uploading') and $img.parent().length > 0
 
-      $img.attr
-        src: @errorImage
-        .addClass 'simditor-image-error'
       @onImageLoadError() if $.isFunction(@onImageLoadError)
 
       @loadImage $img, @errorImage, null, =>
