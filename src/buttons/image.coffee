@@ -191,6 +191,7 @@ class ImageButton extends Button
         img_path = result.file_path
         attach_id = result.attach_id
 
+      alert 'uploadsuccess!'
       @loadImage $img, img_path, attach_id, =>
         $img.removeData 'file'
         $img.removeClass 'uploading'
@@ -224,6 +225,7 @@ class ImageButton extends Button
       $img = file.img
       return unless $img.hasClass('uploading') and $img.parent().length > 0
 
+      alert 'uploaderror!'
       @loadImage $img, @defaultImage, null, =>
         $img.removeData 'file'
         $img.removeClass 'uploading'
