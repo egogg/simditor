@@ -232,6 +232,9 @@ class ImageButton extends Button
 
       @onImageLoadError() if $.isFunction(@onImageLoadError)
 
+      $img.attr
+        src : @errorImage
+
       @loadImage $img, @errorImage, null, =>
         $img.removeData 'file'
         $img.removeClass 'uploading'
@@ -243,7 +246,7 @@ class ImageButton extends Button
 
       if @popover.active
         @popover.srcEl.prop('disabled', false)
-        @popover.srcEl.val @defaultImage
+        @popover.srcEl.val @errorImage
 
       @editor.trigger 'valuechanged'
       if @editor.body.find('img.uploading').length < 1
