@@ -15,6 +15,8 @@ class ImageButton extends Button
 
   errorImage: ''
 
+  errorImageText: ''
+
   needFocus: false
 
   _init: () ->
@@ -40,8 +42,8 @@ class ImageButton extends Button
         @menu = false
 
     @defaultImage = @editor.opts.defaultImage
-    @errorImage = @editor.opts.errorImage
     @onImageLoadError = @editor.opts.onImageLoadError
+    @errorImageText = @editor.opts.errorImageText
 
     @editor.body.on 'click', 'img:not([data-non-image])', (e) =>
       $img = $(e.currentTarget)
@@ -234,21 +236,22 @@ class ImageButton extends Button
       @onImageLoadError() if $.isFunction(@onImageLoadError)
 
       $img.attr
-        src : @errorImage
+        src : ''
+        alt : @errorImageText
       .addClass 'simditor-image-error'
 
-      @loadImage $img, @errorImage, null, =>
-        $img.removeData 'file'
-        $img.removeClass 'uploading'
-        .removeClass 'loading'
+      # @loadImage $img, @errorImage, null, =>
+      $img.removeData 'file'
+      $img.removeClass 'uploading'
+      .removeClass 'loading'
 
-        $mask = $img.data('mask')
-        $mask.remove() if $mask
-        $img.removeData 'mask'
+      $mask = $img.data('mask')
+      $mask.remove() if $mask
+      $img.removeData 'mask'
 
       if @popover.active
         @popover.srcEl.prop('disabled', false)
-        @popover.srcEl.val @errorImage
+        @popover.srcEl.val @errorImageText
 
       @editor.trigger 'valuechanged'
       if @editor.body.find('img.uploading').length < 1

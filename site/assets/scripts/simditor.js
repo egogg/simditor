@@ -4211,6 +4211,8 @@ ImageButton = (function(superClass) {
 
   ImageButton.prototype.errorImage = '';
 
+  ImageButton.prototype.errorImageText = '';
+
   ImageButton.prototype.needFocus = false;
 
   ImageButton.prototype._init = function() {
@@ -4245,8 +4247,8 @@ ImageButton = (function(superClass) {
       }
     }
     this.defaultImage = this.editor.opts.defaultImage;
-    this.errorImage = this.editor.opts.errorImage;
     this.onImageLoadError = this.editor.opts.onImageLoadError;
+    this.errorImageText = this.editor.opts.errorImageText;
     this.editor.body.on('click', 'img:not([data-non-image])', (function(_this) {
       return function(e) {
         var $img, range;
@@ -4473,7 +4475,7 @@ ImageButton = (function(superClass) {
     })(this));
     return this.editor.uploader.on('uploaderror', (function(_this) {
       return function(e, file, xhr) {
-        var $img, msg, result;
+        var $img, $mask, msg, result;
         if (!file.inline) {
           return;
         }
@@ -4498,21 +4500,19 @@ ImageButton = (function(superClass) {
           _this.onImageLoadError();
         }
         $img.attr({
-          src: _this.errorImage
+          src: '',
+          alt: _this.errorImageText
         }).addClass('simditor-image-error');
-        _this.loadImage($img, _this.errorImage, null, function() {
-          var $mask;
-          $img.removeData('file');
-          $img.removeClass('uploading').removeClass('loading');
-          $mask = $img.data('mask');
-          if ($mask) {
-            $mask.remove();
-          }
-          return $img.removeData('mask');
-        });
+        $img.removeData('file');
+        $img.removeClass('uploading').removeClass('loading');
+        $mask = $img.data('mask');
+        if ($mask) {
+          $mask.remove();
+        }
+        $img.removeData('mask');
         if (_this.popover.active) {
           _this.popover.srcEl.prop('disabled', false);
-          _this.popover.srcEl.val(_this.errorImage);
+          _this.popover.srcEl.val(_this.errorImageText);
         }
         _this.editor.trigger('valuechanged');
         if (_this.editor.body.find('img.uploading').length < 1) {
