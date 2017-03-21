@@ -48,6 +48,14 @@ $simditor-button-width: 46px;
       }
     }
 
+    img {
+      &.uploading {
+        width: 100px;
+        height: 100px;
+        border-radius: 2px;
+      }
+    }
+
     .simditor-image-loading {
       width: 100%;
       height: 100%;
@@ -59,7 +67,7 @@ $simditor-button-width: 46px;
       .progress {
         width: 100%;
         height: 100%;
-        background: rgba(0,0,0,0.4);
+        background: rgba(0,0,0,0.8);
         position: absolute;
         bottom: 0;
         left: 0;

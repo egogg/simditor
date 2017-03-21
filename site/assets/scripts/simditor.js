@@ -4419,7 +4419,8 @@ ImageButton = (function(superClass) {
       if (percent > 99) {
         percent = 99;
       }
-      return $mask.find('.progress').height((100 - percent) + "%");
+      $mask.find('.progress').text((100 - percent) + "%");
+      return $mask.find('.backdrop').height((100 - percent) + "%");
     }, 500), this);
     this.editor.uploader.on('uploadprogress', uploadProgress);
     this.editor.uploader.on('uploadsuccess', (function(_this) {
@@ -4543,7 +4544,7 @@ ImageButton = (function(superClass) {
     $img.addClass('loading');
     $mask = $img.data('mask');
     if (!$mask) {
-      $mask = $('<div class="simditor-image-loading">\n  <div class="progress"></div>\n</div>').hide().appendTo(this.editor.wrapper);
+      $mask = $('<div class="simditor-image-loading">\n  <div class="backdrop"></div>\n  <div class="progress"></div>\n</div>').hide().appendTo(this.editor.wrapper);
       positionMask();
       $img.data('mask', $mask);
       $mask.data('img', $img);
