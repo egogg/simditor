@@ -194,29 +194,34 @@ class ImageButton extends Button
             success: false
 
       if result.success == false
-        msg = result.msg || @_t('uploadFailed')
-        alert msg
-        img_path = @defaultImage
+        error = result.error || @_t('uploadFailed')
+        @onImageLoadError(error) if $.isFunction(@onImageLoadError)
+        # img_path = @defaultImage
+        $img.attr
+          src : ''
+          alt : @errorImageText
+        .addClass 'simditor-image-error'
+        @finishLoading $img
       else
-        img_path = result.file_path
-        attach_id = result.attach_id
+        # img_path = result.file_path
+        # attach_id = result.attach_id
+        @loadImage $img, result.file_path, result.attach_id, =>
+          @finishLoading $img
+        # $img.removeData 'file'
+        # $img.removeClass 'uploading'
+        # .removeClass 'loading'
 
-      @loadImage $img, img_path, attach_id, =>
-        $img.removeData 'file'
-        $img.removeClass 'uploading'
-        .removeClass 'loading'
+        # $mask = $img.data('mask')
+        # $mask.remove() if $mask
+        # $img.removeData 'mask'
 
-        $mask = $img.data('mask')
-        $mask.remove() if $mask
-        $img.removeData 'mask'
+      #   @editor.trigger 'valuechanged'
+      #   if @editor.body.find('img.uploading').length < 1
+      #     @editor.uploader.trigger 'uploadready', [file, result]
 
-        @editor.trigger 'valuechanged'
-        if @editor.body.find('img.uploading').length < 1
-          @editor.uploader.trigger 'uploadready', [file, result]
-
-      if @popover.active
-        @popover.srcEl.prop('disabled', false)
-        @popover.srcEl.val result.file_path
+      # if @popover.active
+      #   @popover.srcEl.prop('disabled', false)
+      #   @popover.srcEl.val result.file_path
 
     @editor.uploader.on 'uploaderror', (e, file, xhr) =>
       return unless file.inline
@@ -225,41 +230,57 @@ class ImageButton extends Button
       if xhr.responseText
         try
           result = $.parseJSON xhr.responseText
-          msg = result.msg
+          error = result.error
         catch e
-          msg = @_t('uploadError')
+          error = @_t('uploadError')
 
-        alert msg
+        @onImageLoadError(error) if $.isFunction(@onImageLoadError)
 
       $img = file.img
       return unless $img.hasClass('uploading') and $img.parent().length > 0
-
-      @onImageLoadError() if $.isFunction(@onImageLoadError)
 
       $img.attr
         src : ''
         alt : @errorImageText
       .addClass 'simditor-image-error'
+      @finishLoading $img
 
       # @loadImage $img, @errorImage, null, =>
-      $img.removeData 'file'
-      $img.removeClass 'uploading'
-      .removeClass 'loading'
+      # $img.removeData 'file'
+      # $img.removeClass 'uploading'
+      # .removeClass 'loading'
 
-      $mask = $img.data('mask')
-      $mask.remove() if $mask
-      $img.removeData 'mask'
+      # $mask = $img.data('mask')
+      # $mask.remove() if $mask
+      # $img.removeData 'mask'
 
-      if @popover.active
-        @popover.srcEl.prop('disabled', false)
-        @popover.srcEl.val @errorImageText
+      # if @popover.active
+      #   @popover.srcEl.prop('disabled', false)
+      #   @popover.srcEl.val @errorImageText
 
-      @editor.trigger 'valuechanged'
-      if @editor.body.find('img.uploading').length < 1
-        @editor.uploader.trigger 'uploadready', [file, result]
+      # @editor.trigger 'valuechanged'
+      # if @editor.body.find('img.uploading').length < 1
+      #   @editor.uploader.trigger 'uploadready', [file, result]
 
   _status: ->
     @_disableStatus()
+
+  finishLoading: ($img) ->
+    $img.removeData 'file'
+    $img.removeClass 'uploading'
+    .removeClass 'loading'
+
+    $mask = $img.data('mask')
+    $mask.remove() if $mask
+    $img.removeData 'mask'
+
+    if @popover.active
+      @popover.srcEl.prop('disabled', false)
+      @popover.srcEl.val @errorImageText
+
+    @editor.trigger 'valuechanged'
+    if @editor.body.find('img.uploading').length < 1
+      @editor.uploader.trigger 'uploadready', [file, result]
 
   loadImage: ($img, src, attach_id, callback) ->
     positionMask = =>
