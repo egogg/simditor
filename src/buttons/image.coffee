@@ -171,7 +171,7 @@ class ImageButton extends Button
       percent = loaded / total
       percent = (percent * 100).toFixed(0)
       percent = 99 if percent > 99
-      $mask.find('.progress').text "#{100 - percent}%"
+      $mask.find('.percent').text "#{percent}%"
       $mask.find('.backdrop').height "#{100 - percent}%"
     , 500), @
     @editor.uploader.on 'uploadprogress', uploadProgress
@@ -274,7 +274,7 @@ class ImageButton extends Button
       $mask = $('''
         <div class="simditor-image-loading">
           <div class="backdrop"></div>
-          <div class="progress"></div>
+          <div class="percent"></div>
         </div>
       ''')
         .hide()
