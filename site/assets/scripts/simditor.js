@@ -4209,7 +4209,7 @@ ImageButton = (function(superClass) {
 
   ImageButton.prototype.onImageLoadError = '';
 
-  ImageButton.prototype.errorImage = '';
+  ImageButton.prototype.uploadingText = '';
 
   ImageButton.prototype.errorImageText = '';
 
@@ -4248,6 +4248,7 @@ ImageButton = (function(superClass) {
     }
     this.defaultImage = this.editor.opts.defaultImage;
     this.onImageLoadError = this.editor.opts.onImageLoadError;
+    this.uploadingText = this.editor.opts.uploadingText;
     this.errorImageText = this.editor.opts.errorImageText;
     this.editor.body.on('click', 'img:not([data-non-image])', (function(_this) {
       return function(e) {
@@ -4421,7 +4422,7 @@ ImageButton = (function(superClass) {
       if (percent > 99) {
         percent = 99;
       }
-      $mask.find('.percent').text(percent + "%");
+      $mask.find('.percent').text(this.uploadingText + (" " + percent + "%"));
       return $mask.find('.backdrop').height((100 - percent) + "%");
     }, 500), this);
     this.editor.uploader.on('uploadprogress', uploadProgress);

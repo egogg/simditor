@@ -13,7 +13,7 @@ class ImageButton extends Button
 
   onImageLoadError : ''
 
-  errorImage: ''
+  uploadingText: ''
 
   errorImageText: ''
 
@@ -43,6 +43,7 @@ class ImageButton extends Button
 
     @defaultImage = @editor.opts.defaultImage
     @onImageLoadError = @editor.opts.onImageLoadError
+    @uploadingText = @editor.opts.uploadingText
     @errorImageText = @editor.opts.errorImageText
 
     @editor.body.on 'click', 'img:not([data-non-image])', (e) =>
@@ -173,7 +174,7 @@ class ImageButton extends Button
       percent = loaded / total
       percent = (percent * 100).toFixed(0)
       percent = 99 if percent > 99
-      $mask.find('.percent').text "#{percent}%"
+      $mask.find('.percent').text @uploadingText + " #{percent}%"
       $mask.find('.backdrop').height "#{100 - percent}%"
     , 500), @
     @editor.uploader.on 'uploadprogress', uploadProgress
