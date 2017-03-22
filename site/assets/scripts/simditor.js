@@ -2675,8 +2675,9 @@ Simditor.i18n = {
     'image': '插入图片',
     'externalImage': '外链图片',
     'uploadImage': '上传图片',
-    'uploadFailed': '上传失败了',
-    'uploadError': '上传出错了',
+    'uploadFailed': '图片上传失败',
+    'uploadError': '图片上传错误',
+    'networkError': '网络连接错误',
     'imageUrl': '图片地址',
     'imageSize': '图片尺寸',
     'imageAlt': '图片描述',
@@ -2731,6 +2732,7 @@ Simditor.i18n = {
     'uploadImage': 'Upload Image',
     'uploadFailed': 'Upload failed',
     'uploadError': 'Error occurs during upload',
+    'networkError': 'Network connection error',
     'imageUrl': 'Url',
     'imageSize': 'Size',
     'imageAlt': 'Alt',
@@ -4472,6 +4474,9 @@ ImageButton = (function(superClass) {
         if (xhr.statusText === 'abort') {
           return;
         }
+        if ($.isFunction(_this.onImageLoadError) && xhr.statusText === 'error') {
+          _this.onImageLoadError(_this._t('networkError'));
+        }
         if (xhr.responseText) {
           try {
             result = $.parseJSON(xhr.responseText);
@@ -4492,7 +4497,10 @@ ImageButton = (function(superClass) {
           src: '',
           alt: _this.errorImageText
         }).addClass('simditor-image-error');
-        return _this.finishLoading($img, file, result);
+        _this.finishLoading($img, file, result);
+        if ($.isFunction(_this.onImageLoadError)) {
+          return _this.onImageLoadError;
+        }
       };
     })(this));
   };

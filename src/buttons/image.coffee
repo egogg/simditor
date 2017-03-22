@@ -227,13 +227,14 @@ class ImageButton extends Button
       return unless file.inline
       return if xhr.statusText == 'abort'
 
+      @onImageLoadError(@_t('networkError')) if $.isFunction(@onImageLoadError) and xhr.statusText == 'error'
+      
       if xhr.responseText
         try
           result = $.parseJSON xhr.responseText
           error = result.error
         catch e
           error = @_t('uploadError')
-
         @onImageLoadError(error) if $.isFunction(@onImageLoadError)
 
       $img = file.img
@@ -244,6 +245,7 @@ class ImageButton extends Button
         alt : @errorImageText
       .addClass 'simditor-image-error'
       @finishLoading $img, file, result
+      @onImageLoadError if $.isFunction(@onImageLoadError)
 
       # @loadImage $img, @errorImage, null, =>
       # $img.removeData 'file'
@@ -269,7 +271,7 @@ class ImageButton extends Button
     $img.removeData 'file'
     $img.removeClass 'uploading'
     .removeClass 'loading'
-    
+
     $mask = $img.data('mask')
     $mask.remove() if $mask
     $img.removeData 'mask'
