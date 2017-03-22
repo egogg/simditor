@@ -201,12 +201,12 @@ class ImageButton extends Button
           src : ''
           alt : @errorImageText
         .addClass 'simditor-image-error'
-        @finishLoading $img, file
+        @finishLoading $img, file, result
       else
         # img_path = result.file_path
         # attach_id = result.attach_id
         @loadImage $img, result.file_path, result.attach_id, =>
-          @finishLoading $img, file
+          @finishLoading $img, file, result
         # $img.removeData 'file'
         # $img.removeClass 'uploading'
         # .removeClass 'loading'
@@ -243,7 +243,7 @@ class ImageButton extends Button
         src : ''
         alt : @errorImageText
       .addClass 'simditor-image-error'
-      @finishLoading $img, file
+      @finishLoading $img, file, result
 
       # @loadImage $img, @errorImage, null, =>
       # $img.removeData 'file'
@@ -265,11 +265,11 @@ class ImageButton extends Button
   _status: ->
     @_disableStatus()
 
-  finishLoading: ($img, file) ->
+  finishLoading: ($img, file, result) ->
     $img.removeData 'file'
     $img.removeClass 'uploading'
     .removeClass 'loading'
-
+    
     $mask = $img.data('mask')
     $mask.remove() if $mask
     $img.removeData 'mask'
