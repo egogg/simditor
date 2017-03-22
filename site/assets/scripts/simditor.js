@@ -4455,10 +4455,10 @@ ImageButton = (function(superClass) {
             src: '',
             alt: _this.errorImageText
           }).addClass('simditor-image-error');
-          return _this.finishLoading($img);
+          return _this.finishLoading($img, file);
         } else {
           return _this.loadImage($img, result.file_path, result.attach_id, function() {
-            return _this.finishLoading($img);
+            return _this.finishLoading($img, file);
           });
         }
       };
@@ -4492,7 +4492,7 @@ ImageButton = (function(superClass) {
           src: '',
           alt: _this.errorImageText
         }).addClass('simditor-image-error');
-        return _this.finishLoading($img);
+        return _this.finishLoading($img, file);
       };
     })(this));
   };
@@ -4501,7 +4501,7 @@ ImageButton = (function(superClass) {
     return this._disableStatus();
   };
 
-  ImageButton.prototype.finishLoading = function($img) {
+  ImageButton.prototype.finishLoading = function($img, file) {
     var $mask;
     $img.removeData('file');
     $img.removeClass('uploading').removeClass('loading');
