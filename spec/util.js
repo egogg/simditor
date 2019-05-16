@@ -1,10 +1,7 @@
 (function() {
   window.spec = {
-    generateSimditor: function(opts) {
+    generateSimditor: function(opts = {}) {
       var $textarea;
-      if (opts == null) {
-        opts = {};
-      }
       opts.content || (opts.content = '');
       opts.toolbar || (opts.toolbar = false);
       $textarea = $('<textarea id="editor"></textarea>').val(opts.content).appendTo('body');

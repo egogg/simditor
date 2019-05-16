@@ -29,12 +29,14 @@
     "README.md",
     "umd.hbs"
   ],
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "dependencies": {
-    "jquery": "~2.1.4",
-    "simple-hotkeys": "~1.0.3",
-    "simple-uploader": "~2.0.7",
-    "simple-module": "~2.0.6"
+    "jquery": "^3.3.1",
+    "simple-uploader": "~3.0.0",
+    "simple-module": "~3.0.3",
+    "simple-hotkeys": "git@github.com:egogg/simple-hotkeys.git#^0.3.0"
+  },
+  "resolutions": {
+    "jquery": "^3.3.1"
   }
 }
